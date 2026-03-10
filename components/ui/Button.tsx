@@ -12,11 +12,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantClasses: Record<Variant, string> = {
-  primary:   "bg-dark-blue text-white hover:bg-dark-accent disabled:opacity-50",
-  secondary: "bg-dark-muted text-dark-text hover:bg-dark-border",
+  primary:   "bg-theme-blue text-white hover:bg-theme-accent disabled:opacity-50",
+  secondary: "bg-theme-muted text-theme-text hover:bg-theme-border",
   danger:    "bg-danger text-white hover:opacity-90",
-  ghost:     "bg-transparent text-dark-dim hover:text-dark-text hover:bg-dark-muted",
-  outline:   "bg-transparent border border-dark-border text-dark-dim hover:border-dark-blue hover:text-dark-blue",
+  ghost:     "bg-transparent text-theme-dim hover:text-theme-text hover:bg-theme-muted",
+  outline:   "bg-transparent border border-theme-border text-theme-dim hover:border-theme-blue hover:text-theme-blue",
 };
 
 const sizeClasses: Record<Size, string> = {
@@ -31,7 +31,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ref={ref}
       disabled={disabled || loading}
       className={cn(
-        "font-sans font-medium transition-all duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-dark-accent",
+        "font-sans font-medium transition-all duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-accent",
         variantClasses[variant],
         sizeClasses[size],
         fullWidth && "w-full",

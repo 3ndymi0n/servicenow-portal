@@ -46,19 +46,19 @@ export function ForecastTab({ data, months, customerId }: Props) {
       {/* Controls */}
       <div className="flex items-center gap-4 flex-wrap">
         <div className="flex items-center gap-2">
-          <span className="text-xs text-dark-dim">Metric:</span>
+          <span className="text-xs text-theme-dim">Metric:</span>
           {METRIC_OPTS.map(m => (
             <button key={m.value} onClick={() => setMetric(m.value)}
-              className={`px-2.5 py-1 rounded text-xs border transition-colors ${metric===m.value?"border-dark-blue text-dark-accent bg-dark-blue/20 font-bold":"border-dark-border text-dark-dim"}`}>
+              className={`px-2.5 py-1 rounded text-xs border transition-colors ${metric===m.value?"border-theme-blue text-theme-accent bg-theme-blue/20 font-bold":"border-theme-border text-theme-dim"}`}>
               {m.label}
             </button>
           ))}
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-dark-dim">Horizon:</span>
+          <span className="text-xs text-theme-dim">Horizon:</span>
           {[1,2,3,6].map(h => (
             <button key={h} onClick={() => setHorizon(h)}
-              className={`px-2 py-1 rounded text-xs border transition-colors ${horizon===h?"border-dark-blue text-dark-accent bg-dark-blue/20 font-bold":"border-dark-border text-dark-dim"}`}>
+              className={`px-2 py-1 rounded text-xs border transition-colors ${horizon===h?"border-theme-blue text-theme-accent bg-theme-blue/20 font-bold":"border-theme-border text-theme-dim"}`}>
               {h}mo
             </button>
           ))}
@@ -85,16 +85,16 @@ export function ForecastTab({ data, months, customerId }: Props) {
       <Card>
         <SectionTitle>Forecast — {METRIC_OPTS.find(m=>m.value===metric)?.label} (linear regression + 95% CI)</SectionTitle>
         {forecast.length < 2
-          ? <div className="py-10 text-center text-dark-dim text-sm">Not enough data to build a forecast.</div>
+          ? <div className="py-10 text-center text-theme-dim text-sm">Not enough data to build a forecast.</div>
           : <ResponsiveContainer width="100%" height={300}>
               <AreaChart data={forecast} margin={{ left:-5, right:20 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#142466" vertical={false}/>
+                <CartesianGrid strokeDasharray="3 3" stroke="rgb(var(--border))" vertical={false}/>
                 <XAxis dataKey="month" tick={{ fill:"#6b8fd4", fontSize:10 }} axisLine={false} tickLine={false}/>
                 <YAxis tick={{ fill:"#6b8fd4", fontSize:10 }} axisLine={false} tickLine={false}/>
                 <Tooltip content={<ChartTooltip/>}/>
                 <Legend wrapperStyle={{ fontSize:11 }}/>
                 <Area type="monotone" dataKey="upper" stroke="transparent" fill="#3d6fd411" name="Upper CI"/>
-                <Area type="monotone" dataKey="lower" stroke="transparent" fill="#03071a"   name="Lower CI" fillOpacity={1}/>
+                <Area type="monotone" dataKey="lower" stroke="transparent" fill="rgb(var(--bg))"   name="Lower CI" fillOpacity={1}/>
                 <Line type="monotone" dataKey="actual"   stroke="#5b9fff" strokeWidth={2.5} dot={(p) =>
                   p.payload.isAnomaly ? <circle key={p.key} cx={p.cx} cy={p.cy} r={6} fill="#ef4444" stroke="#ef4444"/> : <circle key={p.key} cx={p.cx} cy={p.cy} r={3} fill="#5b9fff"/>
                 }/>
@@ -114,7 +114,7 @@ export function ForecastTab({ data, months, customerId }: Props) {
           <SectionTitle>Anomaly Log</SectionTitle>
           <table className="w-full text-xs">
             <thead>
-              <tr className="border-b border-dark-border text-dark-dim text-[10px] uppercase">
+              <tr className="border-b border-theme-border text-theme-dim text-[10px] uppercase">
                 <th className="text-left py-1 pr-4">Month</th>
                 <th className="text-right py-1 px-2">Actual</th>
                 <th className="text-right py-1 px-2">Forecast</th>
@@ -123,10 +123,10 @@ export function ForecastTab({ data, months, customerId }: Props) {
             </thead>
             <tbody>
               {anomalies.map((a,i) => (
-                <tr key={i} className="border-b border-dark-border/20">
-                  <td className="py-1 pr-4 font-bold text-dark-text">{a.month}</td>
+                <tr key={i} className="border-b border-theme-border/20">
+                  <td className="py-1 pr-4 font-bold text-theme-text">{a.month}</td>
                   <td className="py-1 px-2 text-right text-danger font-bold">{a.actual}</td>
-                  <td className="py-1 px-2 text-right text-dark-dim">{a.forecast}</td>
+                  <td className="py-1 px-2 text-right text-theme-dim">{a.forecast}</td>
                   <td className="py-1 pl-2 text-right text-warning font-bold">{a.zScore.toFixed(2)}σ</td>
                 </tr>
               ))}

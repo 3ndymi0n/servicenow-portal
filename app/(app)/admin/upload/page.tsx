@@ -56,7 +56,7 @@ export default function UploadPage() {
 
   return (
     <div className="space-y-4 max-w-3xl">
-      <h2 className="text-lg font-extrabold text-dark-text">Upload Ticket Data</h2>
+      <h2 className="text-lg font-extrabold text-theme-text">Upload Ticket Data</h2>
 
       <Card>
         <div className="space-y-4">
@@ -64,13 +64,13 @@ export default function UploadPage() {
             options={[{value:"",label:"— Select customer —"},...customers.map(c=>({value:c.id,label:c.name}))]}/>
 
           <div>
-            <div className="text-xs font-semibold text-dark-dim uppercase tracking-wide mb-1.5">CSV File</div>
+            <div className="text-xs font-semibold text-theme-dim uppercase tracking-wide mb-1.5">CSV File</div>
             <div
               onClick={()=>inputRef.current?.click()}
-              className="border-2 border-dashed border-dark-border rounded-lg p-8 text-center cursor-pointer hover:border-dark-blue transition-colors">
+              className="border-2 border-dashed border-theme-border rounded-lg p-8 text-center cursor-pointer hover:border-theme-blue transition-colors">
               {file
-                ? <><div className="text-2xl mb-1">📄</div><div className="text-sm font-bold text-dark-text">{file.name}</div><div className="text-xs text-dark-dim">{(file.size/1024).toFixed(1)} KB</div></>
-                : <><div className="text-2xl mb-1">📂</div><div className="text-sm text-dark-dim">Click to choose a CSV file</div></>
+                ? <><div className="text-2xl mb-1">📄</div><div className="text-sm font-bold text-theme-text">{file.name}</div><div className="text-xs text-theme-dim">{(file.size/1024).toFixed(1)} KB</div></>
+                : <><div className="text-2xl mb-1">📂</div><div className="text-sm text-theme-dim">Click to choose a CSV file</div></>
               }
               <input ref={inputRef} type="file" accept=".csv" className="hidden" onChange={e=>setFile(e.target.files?.[0]??null)}/>
             </div>
@@ -90,12 +90,12 @@ export default function UploadPage() {
           <div className="grid grid-cols-4 gap-3 mb-4">
             {PANES.map(p => (
               <div key={p.key} className="rounded-md p-3 border text-center cursor-pointer transition-colors"
-                style={{ borderColor: activePane===p.key ? p.color : "#142466", background: activePane===p.key ? `${p.color}11`:undefined }}
+                style={{ borderColor: activePane===p.key ? p.color : "rgb(var(--border))", background: activePane===p.key ? `${p.color}11`:undefined }}
                 onClick={() => setPane(p.key)}>
                 <div className="text-xl font-extrabold" style={{ color:p.color }}>
                   {stats[p.key as keyof DeduplicateStats]}
                 </div>
-                <div className="text-[10px] text-dark-dim mt-0.5">{p.label}</div>
+                <div className="text-[10px] text-theme-dim mt-0.5">{p.label}</div>
               </div>
             ))}
           </div>
@@ -104,27 +104,27 @@ export default function UploadPage() {
             <DataTable cols={TICKET_COLS} rows={details[activePane] as Record<string,unknown>[]} pageSize={15}/>
           )}
           {details && details[activePane].length === 0 && (
-            <div className="text-center text-dark-dim text-sm py-6">No records in this category.</div>
+            <div className="text-center text-theme-dim text-sm py-6">No records in this category.</div>
           )}
         </Card>
       )}
 
       <Card>
         <SectionTitle>CSV Format Requirements</SectionTitle>
-        <div className="text-xs text-dark-dim space-y-1.5">
+        <div className="text-xs text-theme-dim space-y-1.5">
           <p>The CSV must have a header row. Accepted field names (case-insensitive):</p>
           <ul className="list-disc list-inside space-y-0.5 mt-2">
-            <li><b className="text-dark-text">Ticket number:</b> number, Number, ticket_number</li>
-            <li><b className="text-dark-text">Type:</b> type, Type (contains "task" → Catalog Task, else Incident)</li>
-            <li><b className="text-dark-text">Category:</b> category, Category</li>
-            <li><b className="text-dark-text">Priority:</b> priority, Priority</li>
-            <li><b className="text-dark-text">Assignment group:</b> assignment_group, Assignment group</li>
-            <li><b className="text-dark-text">Assigned to:</b> assigned_to, Assigned to, technician</li>
-            <li><b className="text-dark-text">State:</b> state, State, status</li>
-            <li><b className="text-dark-text">Created:</b> sys_created_on, Created, opened_at</li>
-            <li><b className="text-dark-text">Updated:</b> sys_updated_on, Updated, resolved_at</li>
-            <li><b className="text-dark-text">Description:</b> short_description, description, title</li>
-            <li><b className="text-dark-text">Work notes:</b> work_notes, notes, comments</li>
+            <li><b className="text-theme-text">Ticket number:</b> number, Number, ticket_number</li>
+            <li><b className="text-theme-text">Type:</b> type, Type (contains "task" → Catalog Task, else Incident)</li>
+            <li><b className="text-theme-text">Category:</b> category, Category</li>
+            <li><b className="text-theme-text">Priority:</b> priority, Priority</li>
+            <li><b className="text-theme-text">Assignment group:</b> assignment_group, Assignment group</li>
+            <li><b className="text-theme-text">Assigned to:</b> assigned_to, Assigned to, technician</li>
+            <li><b className="text-theme-text">State:</b> state, State, status</li>
+            <li><b className="text-theme-text">Created:</b> sys_created_on, Created, opened_at</li>
+            <li><b className="text-theme-text">Updated:</b> sys_updated_on, Updated, resolved_at</li>
+            <li><b className="text-theme-text">Description:</b> short_description, description, title</li>
+            <li><b className="text-theme-text">Work notes:</b> work_notes, notes, comments</li>
           </ul>
         </div>
       </Card>

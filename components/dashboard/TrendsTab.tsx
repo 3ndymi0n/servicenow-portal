@@ -30,7 +30,7 @@ export function TrendsTab({ data, months }: Props) {
           <SectionTitle>Incident Category Trends</SectionTitle>
           <ResponsiveContainer width="100%" height={240}>
             <LineChart data={catMonthly} margin={{ left:-5, right:10 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#142466" vertical={false}/>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgb(var(--border))" vertical={false}/>
               <XAxis dataKey="month" tick={{ fill:"#6b8fd4", fontSize:10 }} axisLine={false} tickLine={false}/>
               <YAxis tick={{ fill:"#6b8fd4", fontSize:10 }} axisLine={false} tickLine={false} allowDecimals={false}/>
               <Tooltip content={<ChartTooltip/>}/>
@@ -47,7 +47,7 @@ export function TrendsTab({ data, months }: Props) {
           <SectionTitle>Monthly SLA Trend</SectionTitle>
           <ResponsiveContainer width="100%" height={240}>
             <LineChart data={slaMonthly} margin={{ left:-5, right:10 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#142466" vertical={false}/>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgb(var(--border))" vertical={false}/>
               <XAxis dataKey="month" tick={{ fill:"#6b8fd4", fontSize:10 }} axisLine={false} tickLine={false}/>
               <YAxis domain={[0,100]} tick={{ fill:"#6b8fd4", fontSize:10 }} axisLine={false} tickLine={false}/>
               <Tooltip content={<ChartTooltip/>}/>
@@ -62,7 +62,7 @@ export function TrendsTab({ data, months }: Props) {
           <SectionTitle>Category by State</SectionTitle>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={catState.slice(0,8)} layout="vertical" margin={{ left:100, right:10 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#142466" horizontal={false}/>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgb(var(--border))" horizontal={false}/>
               <XAxis type="number" tick={{ fill:"#6b8fd4", fontSize:10 }} axisLine={false} tickLine={false}/>
               <YAxis type="category" dataKey="category" width={105} tick={{ fill:"#6b8fd4", fontSize:10 }} axisLine={false} tickLine={false}/>
               <Tooltip content={<ChartTooltip/>}/>
@@ -78,7 +78,7 @@ export function TrendsTab({ data, months }: Props) {
           <SectionTitle>Category by Type</SectionTitle>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={catType.slice(0,8)} layout="vertical" margin={{ left:100, right:10 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#142466" horizontal={false}/>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgb(var(--border))" horizontal={false}/>
               <XAxis type="number" tick={{ fill:"#6b8fd4", fontSize:10 }} axisLine={false} tickLine={false}/>
               <YAxis type="category" dataKey="category" width={105} tick={{ fill:"#6b8fd4", fontSize:10 }} axisLine={false} tickLine={false}/>
               <Tooltip content={<ChartTooltip/>}/>

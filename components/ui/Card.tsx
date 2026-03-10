@@ -11,9 +11,7 @@ export function Card({ children, className, onClick }: CardProps) {
     <div
       onClick={onClick}
       className={cn(
-        "rounded-card bg-dark-card border border-dark-border p-4 shadow-card",
-        "dark:bg-dark-card dark:border-dark-border",
-        "light:bg-light-card light:border-light-border",
+        "rounded-card bg-theme-card border border-theme-border p-4 shadow-card",
         onClick && "cursor-pointer hover:-translate-y-0.5 transition-transform duration-100",
         className
       )}
@@ -33,7 +31,7 @@ export function SectionTitle({
   return (
     <h3
       className={cn(
-        "text-xs font-semibold uppercase tracking-wider text-dark-dim mb-3",
+        "text-xs font-semibold uppercase tracking-wider text-theme-dim mb-3",
         className
       )}
     >

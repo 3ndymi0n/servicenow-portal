@@ -12,7 +12,7 @@ interface Props { data:AnalyticsData; months:string[]; dataMonths:string[] }
 
 const SlaBar = ({ met, size="md" }: { met:number; size?:"sm"|"md" }) => (
   <div className={`flex items-center gap-2 ${size==="sm"?"text-[10px]":"text-xs"}`}>
-    <div className={`flex-1 rounded-full bg-dark-muted ${size==="sm"?"h-1.5":"h-2"}`}>
+    <div className={`flex-1 rounded-full bg-theme-muted ${size==="sm"?"h-1.5":"h-2"}`}>
       <div className="h-full rounded-full transition-all"
         style={{ width:`${met}%`, background: met>=90?"#22c55e":met>=75?"#f59e0b":"#ef4444" }}/>
     </div>
@@ -53,7 +53,7 @@ export function SlaTab({ data, months, dataMonths }: Props) {
           <SectionTitle>SLA Met % — Monthly Trend</SectionTitle>
           <ResponsiveContainer width="100%" height={200}>
             <LineChart data={mthSla} margin={{ left:-10, right:10 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#142466" vertical={false}/>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgb(var(--border))" vertical={false}/>
               <XAxis dataKey="month" tick={{ fill:"#6b8fd4", fontSize:10 }} axisLine={false} tickLine={false}/>
               <YAxis domain={[0,100]} tick={{ fill:"#6b8fd4", fontSize:10 }} axisLine={false} tickLine={false}/>
               <Tooltip content={<ChartTooltip/>}/>
@@ -69,8 +69,8 @@ export function SlaTab({ data, months, dataMonths }: Props) {
             {slaByPri.filter(p=>p.Total as number > 0).map((p,i) => (
               <div key={i}>
                 <div className="flex justify-between text-xs mb-1">
-                  <span className="font-bold text-dark-text">{p.priority as string}</span>
-                  <span className="text-dark-dim">{Math.round((p.Met as number)*ratio)}/{Math.round((p.Total as number)*ratio)}</span>
+                  <span className="font-bold text-theme-text">{p.priority as string}</span>
+                  <span className="text-theme-dim">{Math.round((p.Met as number)*ratio)}/{Math.round((p.Total as number)*ratio)}</span>
                 </div>
                 <SlaBar met={p["Met %"] as number}/>
               </div>
@@ -85,7 +85,7 @@ export function SlaTab({ data, months, dataMonths }: Props) {
           <SectionTitle>SLA by Category</SectionTitle>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={slaByCat} layout="vertical" margin={{ left:100, right:50 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#142466" horizontal={false}/>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgb(var(--border))" horizontal={false}/>
               <XAxis type="number" domain={[0,100]} tick={{ fill:"#6b8fd4", fontSize:10 }} axisLine={false} tickLine={false}/>
               <YAxis type="category" dataKey="category" width={105} tick={{ fill:"#6b8fd4", fontSize:10 }} axisLine={false} tickLine={false}/>
               <Tooltip content={<ChartTooltip/>}/>
@@ -102,8 +102,8 @@ export function SlaTab({ data, months, dataMonths }: Props) {
             {slaByGrp.slice(0,8).map((g,i) => (
               <div key={i}>
                 <div className="flex justify-between text-xs mb-0.5">
-                  <span className="text-dark-text font-semibold">{g.assignment_group as string}</span>
-                  <span className="text-dark-dim">{g.Total as number} tickets</span>
+                  <span className="text-theme-text font-semibold">{g.assignment_group as string}</span>
+                  <span className="text-theme-dim">{g.Total as number} tickets</span>
                 </div>
                 <SlaBar met={g["Met %"] as number} size="sm"/>
               </div>

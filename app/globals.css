@@ -5,44 +5,58 @@
 @tailwind utilities;
 
 @layer base {
+    /* RGB channel values (space-separated) so Tailwind opacity modifiers work:
+       e.g. bg-theme-blue/20 → rgb(var(--blue) / 0.2)                         */
+
+    /*
+     * DARK THEME
+     * Deep navy identity, but with borders/cards that are clearly distinguishable.
+     * --border is ~2.7:1 contrast vs --bg so it shows without being harsh.
+     */
     .dark {
-        --bg: #03071a;
-        --surface: #060f2e;
-        --card: #0a1640;
-        --border: #142466;
-        --text: #dce8ff;
-        --dim: #6b8fd4;
-        --muted: #1a2f6e;
-        --blue: #3d6fd4;
-        --accent: #5b9fff;
-    }
+        --bg: 6 11 24; /* #060b18 — near-black navy              */
+        --surface: 13 21 38; /* #0d1526 — nav / sidebar background     */
+        --card: 20 31 54; /* #141f36 — card / panel background      */
+        --border: 60 88 145; /* #3c5891 — 2.8:1 vs bg, clearly visible */
+        --text: 220 232 255; /* #dce8ff — soft white-blue              */
+        --dim: 120 152 204; /* #7898cc — muted blue for secondary text*/
+        --muted: 26 45 74; /* #1a2d4a — hover backgrounds            */
+        --blue: 77 142 240; /* #4d8ef0 — primary interactive blue     */
+        --accent: 121 184 255; /* #79b8ff — highlight / link blue        */
 
-    .light {
-        --bg: #d6dff5;
-        --surface: #eef2fc;
-        --card: #ffffff;
-        --border: #a0b0dc;
-        --text: #06124a;
-        --dim: #3a54a0;
-        --muted: #c8d4ee;
-        --blue: #00167f;
-        --accent: #0035cc;
-    }
-
-    :root {
         color-scheme: dark;
     }
 
+    /*
+     * LIGHT THEME
+     * Clean near-white surfaces (slate palette), dark readable text.
+     * Borders use a soft slate-grey so they're visible on white without being heavy.
+     */
+    .light {
+        --bg: 222 238 255; /* #f8fafc — slate-50, almost white       */
+        --surface: 255 255 255; /* #ffffff — pure white                   */
+        --card: 255 255 255; /* #ffffff — pure white                   */
+        --border: 203 213 225; /* #cbd5e1 — slate-300, subtle grey       */
+        --text: 15 23 42; /* #0f172a — slate-900, near black        */
+        --dim: 100 116 139; /* #64748b — slate-500, readable grey     */
+        --muted: 241 245 249; /* #f1f5f9 — slate-100, hover backgrounds */
+        --blue: 37 99 235; /* #2563eb — blue-600, vibrant blue       */
+        --accent: 29 78 216; /* #1d4ed8 — blue-700, slightly deeper    */
+
+        color-scheme: light;
+    }
+
+    /* Default border colour to our theme token — prevents bare `border` class
+       from falling back to Tailwind's currentColor (which is our near-white
+       text colour in dark mode, causing the "white border" issue).           */
+    *,
+    ::before,
+    ::after {
+        border-color: rgb(var(--border));
+    }
+
     body {
-        @apply font-sans antialiased;
-    }
-
-    .dark body {
-        @apply bg-dark-bg text-dark-text;
-    }
-
-    .light body {
-        @apply bg-light-bg text-light-text;
+        @apply font-sans antialiased bg-theme-bg text-theme-text;
     }
 
     * {
@@ -58,11 +72,11 @@
         background: transparent;
     }
     ::-webkit-scrollbar-thumb {
-        background: #142466;
+        background: rgb(var(--border));
         border-radius: 3px;
     }
     ::-webkit-scrollbar-thumb:hover {
-        background: #3d6fd4;
+        background: rgb(var(--blue));
     }
 }
 

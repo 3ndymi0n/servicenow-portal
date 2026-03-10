@@ -18,7 +18,7 @@ export function KpiCard({ label, value, sub, color = "#3d6fd4", icon, flag, clas
       style={{ borderLeft: `3px solid ${color}` } as React.CSSProperties}
     >
       {icon && <div className="text-lg mb-1.5">{icon}</div>}
-      <div className="text-[10px] font-semibold uppercase tracking-wider text-dark-dim mb-1.5">
+      <div className="text-[10px] font-semibold uppercase tracking-wider text-theme-dim mb-1.5">
         {label}
       </div>
       <div className="text-2xl font-extrabold leading-tight" style={{ color }}>
@@ -30,7 +30,7 @@ export function KpiCard({ label, value, sub, color = "#3d6fd4", icon, flag, clas
             "text-xs mt-1",
             flag === "bad"  && "text-danger",
             flag === "warn" && "text-warning",
-            !flag           && "text-dark-dim"
+            !flag           && "text-theme-dim"
           )}
         >
           {sub}
